@@ -619,8 +619,24 @@ $( function() {
    WinPrint.document.write('Были выслано ТЗ трем поставщикам. На основании ТЗ было получено три ценовых предложения, представленных в таблице ниже.<br>');
    
    
+   Sred4 = 0;
+    
+   Sred4 = ((1*document.getElementById("S1").value + 1*document.getElementById("S2").value + 1*document.getElementById("S3").value)/3).toFixed(2); 
    
-    test44 = "<table border=1 id=\"1\">" +
+   
+   
+  
+  
+  
+  
+  
+  
+   Sred44 = ((((Math.sqrt((( ((1*document.getElementById("S1").value - Sred4 )*(1*document.getElementById("S1").value - Sred4 )) 
+   + ((1*document.getElementById("S2").value - Sred4 )*(1*document.getElementById("S2").value - Sred4 ))
+    + ((1*document.getElementById("S3").value - Sred4 )*(1*document.getElementById("S3").value - Sred4 )) )/2))))/ Sred4)*100).toFixed(2);
+   
+   
+   test44 = "<table border=1 id=\"1\">" +
   
   "<tr>" +
 	"<tr>" +
@@ -628,18 +644,24 @@ $( function() {
 		"<th>Первый поставщик</th>" +
 		"<th>Второй поставщик</th>" +
 		"<th>Третий поставщик</th>" +
+		"<th>Среднеарифметическое значение цены</th>" +
+		"<th>Коэффициент вариации</th>" +
 	"</tr>"  +
 	"<tr>" +
 		"<th>Номер письма</th>" +
 		"<th>" + document.getElementById("NP1").value + "</th>" +
 		"<th>" + document.getElementById("NP2").value + "</th>" +
 		"<th>" + document.getElementById("NP3").value + "</th>" +
+		"<th></th>" +
+		"<th>" + Sred44 + " % </th>" +
 	"</tr>"  +
 	"<tr>" +
 		"<th>Сумма, тыс. рублей</th>" +
 		"<th>" + document.getElementById("S1").value + "</th>" +
 		"<th>" + document.getElementById("S2").value + "</th>" +
 		"<th>" + document.getElementById("S3").value + "</th>" +
+		"<th> " + Sred4 + " </th>" +
+		"<th></th>" +
 	"</tr>"  +
 	"</tr>"  +
 	
@@ -1131,7 +1153,7 @@ $( function() {
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "NP1") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'Не забывайте, что коэффициент вариации всех приведенных Вами сумм не должен превышать <b><span class="colortext">32% </span> </b>! <br> ';
+                          document.getElementById("NPI44").innerHTML = 'Не забывайте, что мера относительного разброса предлагаемых цен или коэффициент вариации всех приведенных Вами сумм не должен превышать <b><span class="colortext"> 33% </span> </b>! <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "S1") {
