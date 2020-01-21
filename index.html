@@ -51,6 +51,12 @@ $( function() {
 <!--             -->
 
 
+<style>
+   .colortext {
+     color: red; /* Красный цвет выделения */
+   }
+  </style>
+
 <div id="e44" title="Методическая поддержка">
 	                        <div id="w1" ></div>
 <table cellpadding="0" cellspacing="0" id="demo_navi1">
@@ -166,10 +172,10 @@ $( function() {
 	                                <input id="NPA_Base" type="text" name="NPA_Base" data-callback="storeState" data-conv-question="Укажите перечень НПА, протоколов совещаний и прочих документов в соответствии с которыми принято решение о необходимости реализации и финансирования Вашего мероприятия"> 
 	                                
 	                                <select id="Type" name="Type" data-callback="storeState" data-conv-question="Выберите цели мероприятия с точки зрения их экономической целесоообразности, {name44}:0!" multiple>
-	                                 <option value="Создание">Создание</option>
-	                                 <option value="Развитие">Развитие</option>
-	                                 <option value="Оптимизация">Оптимизация</option>
-	                                 <option value="Снижение рисков">Снижение рисков</option>
+	                                 <option value="Исполнение нормативных актов">Исполнение нормативных актов</option>
+	                                 <option value="Рост доходов федерального бюджета">Рост доходов</option>
+	                                 <option value="Оптимизация деятельности ФОИВ">Оптимизация деятельности ФОИВ</option>
+	                                 <option value="Повышение качества предоставленич государственных услуг">Повышение качества предоставленич госуслуг</option>
 	                                 <option value="Реализация требований контроллирующих органов">Реализация требований контроллирующих органов</option>
 	                                 </select>
 	                                 <select id="Napr" name="Napr" data-callback="storeState" data-conv-question="Выберите приоритетные направления на которые будет направлено мероприятие , {name44}:0!" multiple>
@@ -423,6 +429,31 @@ $( function() {
 	"<tr>" +
 		"<th> Заказчик " +
 		"<th> " + document.getElementById("FOIV").value + " </th>" +
+	"</tr>"  +
+	"<tr>" +
+		"<th> ФОИВ " +
+		"<th> Федеральный Орган Исполнительной Власти </th>" +
+	"</tr>"  +
+	"<tr>" +
+		"<th> ПО " +
+		"<th> Программное обеспечение </th>" +
+	"</tr>"  +
+	"<tr>" +
+		"<th> ЦОД " +
+		"<th> Центр Обработки Данных </th>" +
+	"</tr>"  +
+	
+	"<tr>" +
+		"<th> ЕСПД " +
+		"<th> Единая Система Передачи Данных </th>" +
+	"</tr>"  +
+	"<tr>" +
+		"<th> СМЭВ " +
+		"<th> Система Межведовственого Электронного Документооборота </th>" +
+	"</tr>"  +
+	"<tr>" +
+		"<th> СУБД " +
+		"<th> Система управления базами данных </th>" +
 	"</tr>"  +
 	"</tr>"  +
 	
@@ -906,12 +937,13 @@ $( function() {
                           
                           
                           
-                          document.getElementById("NPI44").innerHTML = 'Опишите текущую ситуацию в Вашей организации или отрасли на момент запуска Вашего Мероприятия. <br> '; 
+                          document.getElementById("NPI44").innerHTML = 'Опишите текущую ситуацию в Вашей организации или отрасли на момент запуска Вашего Мероприятия. <br> Или приведите характеристику объектов автоматизации. '; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                         } else if (name == "Current") {
                           if (otv4 !="") {bal4=bal4+1;} 
                           document.getElementById("NPI44").innerHTML = 'Опишите ситуацию, из-за чего необходимо провести Ваше Мероприятие. Это может быть список проблем.  <br> Важно отметить здесь, что проводимое мероприятие не дублирует уже проведенные ранее мероприятия и привести аргументы. ';
+                          if (document.getElementById("Current").innerHTML.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4;}
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                         } else if (name == "Problems") {
@@ -919,6 +951,7 @@ $( function() {
                           document.getElementById("NPI44").innerHTML = 'Обычно Вы сможете сразу определить это из названия Вашего мероприятия. <br> ';
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
+                          if (document.getElementById("Current").innerHTML.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: полная Халтура!"; bal4=0;}
                           document.getElementById("navi5").innerHTML = "<s>Проблемы решаемые мероприятием";
                         } else if (name == "Profit") {
                           if (otv4 !="") {bal4=bal4+1;} 
@@ -1012,95 +1045,95 @@ $( function() {
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "NP1") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = 'Не забывайте, что коэффициент вариации всех приведенных Вами сумм не должен превышать <b><span class="colortext">32% </span> </b>! <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "S1") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "NP2") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "S2") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "NP3") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "S3") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("navi10").innerHTML = " <s>Расчет бюджета";
                         } else if (name == "Met_obos") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Tarifs1") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Tarifs2") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Tarifs3") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Tarifs4") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Tarifs5") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Tarifs6") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Tarifs7") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = 'Укажите среднемесячную номинальную начисленную заработную плату - ФОТ. <br> Вы должны использовать данные Росстат за предыдущий квартал этого года.';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Zarp") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = 'Укажите накладные расходы в %. <br> Среднее значение накладных расходов составляет 30-40%. ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Nacl") {
                           
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = 'Укажите норму прибыли в %. <br> Обычно в районе 10-20% ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Norm") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = 'Просим Вас подтвердить или опровергнуть факт использования Российского ПО. <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                            document.getElementById("navi10").innerHTML = "<s>Расчет бюджета";
                         } else if (name == "Import") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = 'TEOBOT благодарит Вас за потраченное время и надеется, что сделанное Экспресс-ТЭО значительно сократит время разработки проектной документации по мероприятию. <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else {
