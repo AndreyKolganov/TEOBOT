@@ -323,11 +323,11 @@ $( function() {
 	                                 <div data-conv-fork="Metods">
 	                                    <div data-conv-case="met1">
 	                                        <input data-callback="storeState" id="NP1" type="text" name="NP1" data-conv-question="Напишите номер письма, от первого поставщика">
-	                                        <input data-callback="storeState" id="S1" type="text" name="S1" data-pattern="^[ 0-9]+$" data-conv-question="Напишите сумму в рублях, от первого поставщика">
+	                                        <input data-callback="storeState" id="S1" type="text" name="S1" data-pattern="^[ 0-9]+$" data-conv-question="Напишите сумму в тыс. рублях, от первого поставщика">
 	                                        <input data-callback="storeState" id="NP2" type="text" name="NP2" data-conv-question="Напишите номер письма, от второго поставщика">
-	                                        <input data-callback="storeState" id="S2" type="text" name="S2" data-pattern="^[ 0-9]+$" data-conv-question="Напишите сумму в рублях, от второго поставщика">
+	                                        <input data-callback="storeState" id="S2" type="text" name="S2" data-pattern="^[ 0-9]+$" data-conv-question="Напишите сумму в тыс. рублях, от второго поставщика">
 	                                        <input data-callback="storeState" id="NP3" type="text" name="NP3" data-conv-question="Напишите номер письма, от третьего поставщика">
-	                                        <input data-callback="storeState" id="S3" type="text" name="S3" data-pattern="^[ 0-9]+$" data-conv-question="Напишите сумму в рублях, от третьего поставщика">
+	                                        <input data-callback="storeState" id="S3" type="text" name="S3" data-pattern="^[ 0-9]+$" data-conv-question="Напишите сумму в тыс. рублях, от третьего поставщика">
 	                                    </div>
 	                                    <div data-conv-case="met4">
 	                                        <input id="normat_prik" type="text" name="normat_prik" data-callback="storeState" data-conv-question="Напишите номер приказа, в котором приведены нормативы расчетов">
@@ -563,7 +563,7 @@ $( function() {
    if ((document.getElementById("web4").value == '22')) { WinPrint.document.write('<br>3.7.4 Система развиваемая в рамках Мероприятия не будет включать открытые данные.<br>'); }
    
    
-   WinPrint.document.write('<br>3.7.4 Система развиваемая в рамках Мероприятия должна использовать следущие технологии импортозамещения: '+document.getElementById("FT_im4").value+'<br>');
+   WinPrint.document.write('<br>3.7.5 Система развиваемая в рамках Мероприятия должна использовать следущие технологии импортозамещения: '+document.getElementById("FT_im4").value+'<br>');
    }
    
    for (step = 0; step < 12; step++) {
@@ -761,7 +761,7 @@ $( function() {
    
    
    
-   itog44 = 1*nds44 + 1*work44;
+   itog44 = (1*nds44 + 1*work44).toFixed(2);
    
    
     test44 = "<table border=1 id=\"1\">" +
@@ -849,6 +849,9 @@ $( function() {
 	"<\/table>"
 	  
    WinPrint.document.write(test44); 
+   
+   
+   WinPrint.document.write('<br><br>Стоимость работ по мероприятию составляет: <b>'+ itog44 +'</b> рублей, включая НДС.');
    }
    
    
@@ -919,7 +922,7 @@ $( function() {
                           // document.getElementById("navi1").innerHTML = "";
                         } else if (name == "FOIV") {
                            
-                          document.getElementById("NPI44").innerHTML = 'Например: Создание системы анализа ценностей Минкультуры'; 
+                          document.getElementById("NPI44").innerHTML = 'Например:<br> Создание системы анализа ценностей Минкультуры'; 
 
                      if (document.getElementById("FOIV").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
                      if (document.getElementById("FOIV").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";  }
@@ -928,9 +931,9 @@ $( function() {
                          // document.getElementById("navi1").innerHTML = "";
                         } else if (name == "Name") {
                           if (otv4 !="") {bal4=bal4+1}; 
-                     if (document.getElementById("Name").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+                     if (document.getElementById("Name").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-8; q4 = q4-1;}
 					 if (document.getElementById("Name").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";  }
-                          document.getElementById("NPI44").innerHTML = 'Например: Система анализа ценностей Минкультуры';
+                          document.getElementById("NPI44").innerHTML = 'Например:<br> Система анализа ценностей Минкультуры';
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("navi1").innerHTML = "<s>Титульная страница";
@@ -938,30 +941,34 @@ $( function() {
                           if (otv4 !="") {bal4=bal4+1;} 
     
                           
-                    if (document.getElementById("System").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+                    if (document.getElementById("System").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-8; q4 = q4-1;}
                     
                     if (document.getElementById("System").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";  }
-                          document.getElementById("NPI44").innerHTML = 'Например: САЦ';
+                          document.getElementById("NPI44").innerHTML = 'Например:<br> САЦ';
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                         } else if (name == "System4") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                     if (document.getElementById("System4").value.length < 1 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+                     if (document.getElementById("System4").value.length < 1 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-8; q4 = q4-1;}
                      
                      if (document.getElementById("System4").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";}
-                          document.getElementById("NPI44").innerHTML = 'Например: Полномочия по обеспечению создания и развития ГИИС ЭБ закреплены за Федеральным Казначейством распоряжением Правительства Российской Федерации от 20 июля 2011 г. № 1275-р';
+                          document.getElementById("NPI44").innerHTML = 'Например:<br> Полномочия по обеспечению создания и развития ГИИС ЭБ закреплены за Федеральным Казначейством распоряжением Правительства Российской Федерации от 20 июля 2011 г. № 1275-р';
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("navi2").innerHTML = "<s>Общие сведения";
                         } else if (name == "Base") {
                           if (otv4 !="") {bal4=bal4+1;} 
                          
-                          if (document.getElementById("Base").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+                          
+                          if (document.getElementById("Base").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-8; q4 = q4-1;}
+                     	  
+                     	  
+                     	  
                      	  if (document.getElementById("Base").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";}
 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
-                          document.getElementById("NPI44").innerHTML = 'Например: Мероприятие направлено на снижение времени предоставления государственной услуги с 10 минут до 4 минут; <br> Количество государственных функций, выполняемых государственным органом посредством информационной системы - 4';
+                          document.getElementById("NPI44").innerHTML = 'Например: <br> Мероприятие направлено на снижение времени предоставления государственной услуги с 10 минут до 4 минут; <br> Количество государственных функций, выполняемых государственным органом посредством информационной системы - 4';
                         } else if (name == "KPI_Base") {
                           if (otv4 !="") {bal4=bal4+1;} 
                    
@@ -970,7 +977,7 @@ $( function() {
                     if (document.getElementById("KPI_Base").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";}
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
-                          document.getElementById("NPI44").innerHTML = 'Например: создание Системы  будет осуществляться за счет средств федерального бюджета, предусмотренных Федеральным законом от 19 декабря 2016 г. № 415-ФЗ';
+                          document.getElementById("NPI44").innerHTML = 'Например: <br>Создание Системы  будет осуществляться за счет средств федерального бюджета, предусмотренных Федеральным законом от 19 декабря 2016 г. № 415-ФЗ';
                         } else if (name == "NPA_Base") {
                           if (otv4 !="") {bal4=bal4+1;} 
                           if (document.getElementById("NPA_Base").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
@@ -984,7 +991,7 @@ $( function() {
                         } else if (name == "Type") {
                           if (otv4 !="") {bal4=bal4+1;} 
                           document.getElementById("e4").innerHTML = "Качество создания ТЭО:";
-                          document.getElementById("NPI44").innerHTML = 'Рекомендация: Если Вы закупается программное или аппаратное обеспечение для защиты информации или проводите работы по защите информации, то ставте приоритетное направление - Защита информации.<br> Если закупается программное или аппаратное обеспечение для создания интернет-порталов или проводятся работы по созданию интернет-порталов - выбирайте направление: Повышение качества и доступности информационных ресурсов.';
+                          document.getElementById("NPI44").innerHTML = 'Рекомендация:<br> Если Вы закупается программное или аппаратное обеспечение для защиты информации или проводите работы по защите информации, то ставте приоритетное направление - Защита информации.<br> Если закупается программное или аппаратное обеспечение для создания интернет-порталов или проводятся работы по созданию интернет-порталов - выбирайте направление: Повышение качества и доступности информационных ресурсов.';
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("navi3").innerHTML = "<s>Цели и задачи мероприятия";
@@ -1025,17 +1032,17 @@ $( function() {
                           document.getElementById("vide44").innerHTML = '<video width=' + '\'260\'' + 'height=' +'\'160\''+ 'controls=' + '\'controls\'' + '><source src=\'v_imp44.mp4\'></video>';  
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "FT_im4") {
-                          document.getElementById("NPI44").innerHTML = 'Например: 1) Импорт данных в базу данных. <br> 2) Представление данных на веб-сайте. <br> 3) Обеспечение безопасности данных. <br> 4) Хранение данных.';
+                          document.getElementById("NPI44").innerHTML = 'Например:<br> 1) Импорт данных в базу данных. <br> 2) Представление данных на веб-сайте. <br> 3) Обеспечение безопасности данных. <br> 4) Хранение данных.';
                           document.getElementById("vide44").innerHTML = '';  
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "FT") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'Например: 1) Подсистема импорта данных. <br> 2) Подсистема представления данных на веб-сайте. <br> 3) Подсистема обеспечения безопасности данных. <br> 4) Подсистема хранения данных.<br> ';
+                          document.getElementById("NPI44").innerHTML = 'Например: <br>1) Подсистема импорта данных. <br> 2) Подсистема представления данных на веб-сайте. <br> 3) Подсистема обеспечения безопасности данных. <br> 4) Подсистема хранения данных.<br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "FT2") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'Например: 1) Разработка класса защищенности данных. <br> 2) Разработка перечня актуальных угроз.';
+                          document.getElementById("NPI44").innerHTML = 'Например: <br> 1) Разработка класса защищенности данных. <br> 2) Разработка перечня актуальных угроз.';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "FT4") {
@@ -1064,7 +1071,7 @@ $( function() {
                           document.getElementById("navi6").innerHTML = " <s>Требования";
                         } else if (name == "web4") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'Например: 1) ФИО. <br> 2) Название. ';
+                          document.getElementById("NPI44").innerHTML = 'Например:<br> 1) ФИО. <br> 2) Название. ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "web44") {
@@ -1088,12 +1095,18 @@ $( function() {
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("navi7").innerHTML = "<s>Ключевые показатели";
+                          
                         } else if (name == "Success_Profit") {
                           if (otv4 !="") {bal4=bal4+1;} 
                           document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
-                           document.getElementById("navi8").innerHTML = "<s>Критерии достижения целей";
+                          document.getElementById("navi8").innerHTML = "<s>Критерии достижения целей";
+                          if (document.getElementById("Success_Profit").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-8; q4 = q4-1;}
+                     	  
+                     	  
+                     	  
+                     	  if (document.getElementById("Success_Profit").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";}
                         } else if (name == "Success_mate") {
                           if (otv4 !="") {bal4=bal4+1;} 
                           document.getElementById("NPI44").innerHTML = ' <br> ';
@@ -1209,7 +1222,9 @@ $( function() {
                           document.getElementById("NPI44").innerHTML = 'TEOBOT благодарит Вас за потраченное время и надеется, что сделанное Экспресс-ТЭО значительно сократит время разработки проектной документации по мероприятию. <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           
-                          if (q4 < 0) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Неудовлетворительное ";}
+                          if (q4 < 6) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Неудовлетворительное ";}
+                          
+                          if (q4 < 0) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Халтура ";}
                           if (q4 >= 0) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Вы делаете успехи! ";}
                           
                           
