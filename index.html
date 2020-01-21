@@ -268,7 +268,7 @@ $( function() {
 		                                  	<input id="normat_prik" type="text" name="normat_prik" data-callback="storeState" data-conv-question="Напишите номер приказа на создание {System}, которая должны быть выведена из эксплуатации"> 
 		                                  	<input id="FTRE" type="text" name="FTRE" data-callback="storeState" data-conv-question="Приведите список работ, которые должны быть проведены для вывода из эксплуатации {System}"> 
 	                                                                         
-	                                         <input id="FT4" type="text" name="FT4" data-callback="storeState" data-conv-question="Приведите требования к безопасности работ по выведению {System} из эксплуатации">                                    
+	                                         <input id="FT4V" type="text" name="FT4V" data-callback="storeState" data-conv-question="Приведите требования к безопасности работ по выведению {System} из эксплуатации">                                    
 		                                </div>
 	                                    <div data-conv-case="Profit3">
 	                                    
@@ -277,7 +277,7 @@ $( function() {
 	                                        
 	                                         <input id="FT2" type="text" name="FT2" data-callback="storeState" data-conv-question="Приведите список подсистем {System}, которые должны быть введены в эксплуатацию">   
 	                                         
-	                                         <input id="FT4" type="text" name="FT4" data-callback="storeState" data-conv-question="Приведите требования к безопасности при проведении эксплуатации {System}">   
+	                                         <input id="FT4E" type="text" name="FT4E" data-callback="storeState" data-conv-question="Приведите требования к безопасности при проведении эксплуатации {System}">   
 	                                    </div>
 	                                 </div>
 	                                 
@@ -287,14 +287,15 @@ $( function() {
 
 	                                 <input id="Crit_Profit" type="text" name="Crit_Profit" data-callback="storeState" data-conv-question="Укажите критерии достижения целей мероприятия"> 
 	                                    
-	                                 <input id="Success_Profit" type="text" name="Success_Profit" data-callback="storeState" data-conv-question="Укажите перечень результатов мероприятий"> 
+	                                 <input id="Success_Profit" type="text" name="Success_Profit" pattern="^((?!.*обучение.*)[А-Яа-яЁё\s])*$"  data-callback="storeState" data-conv-question="Укажите перечень результатов мероприятий"> 
 	                                     
 	                               
 	                               
 	                                 <select id="Success_mate" name="Success_mate" data-callback="storeState" data-conv-question="Выберите общие характеристики материальных результатов мероприятия, {name44}:0!" multiple>
+	                                 <option value="Товары">Товары</option>
 	                                 <option value="Работы">Работы</option>
-	                                 <option value="Разработки">Разработки</option>
-	                                 <option value="Поставки товаров">Поставки товаров</option>
+	                                 
+	                                 <option value="Услуги">Услуги</option>
 	                                 </select>
 	                                 
 	                                 <select id="Success_nomate" name="Success_nomate" data-callback="storeState" data-conv-question="Выберите общие характеристики не материальных результатов мероприятия в части количественных и качественных характеристик, {name44}:0!" multiple>
@@ -492,7 +493,7 @@ $( function() {
     //случай одиночного выбора в select
   } else
     e4=elm4.value;
- // alert(e4);
+ //  alert(e4);
   
    WinPrint.document.write('3.1 Целями Мероприятия является: '+ e4 +'<br>') 
   
@@ -503,8 +504,14 @@ $( function() {
    WinPrint.document.write('<br>3.3 Основанием для реализации мероприятия являются следующие нормативно правовые документы:<br>');
   
    WinPrint.document.write(' '+document.getElementById("Base").value+'<br>');
+   
+  //  alert(document.getElementById("Profit").value);
     
-   if ((document.getElementById("Profit").value == 'Profit2')) { WinPrint.document.write('<br>Развиваемая в этом мероприятии Система была создана на основе приказа: '+document.getElementById("normat_prik").value+'<br>'); } 
+   if ((document.getElementById("Profit").value == 'Profit2')) { WinPrint.document.write('<br>Развиваемая в этом мероприятии Система ' + document.getElementById("System4").value + ' была создана на основе приказа: '+document.getElementById("normat_prik").value+'<br>'); } 
+   
+   if ((document.getElementById("Profit").value == 'Profit2')) { WinPrint.document.write('<br>Развиваемая в этом мероприятии Система ' + document.getElementById("System4").value + ' была введена в эксплуатацию на основе приказа: '+document.getElementById("normat_prike").value+'<br>'); } 
+   if ((document.getElementById("Profit").value == 'Profit4')) { WinPrint.document.write('<br>Выводимая из эксплуатации в этом мероприятии Система ' + document.getElementById("System4").value + ' была создана на основе приказа: '+document.getElementById("normat_prik").value+'<br>'); } 
+   if ((document.getElementById("Profit").value == 'Profit3')) { WinPrint.document.write('<br>Вводимая в эксплуатацию в этом мероприятии Система ' + document.getElementById("System4").value +  ' была создана на основе приказа: '+document.getElementById("normat_prik").value+'<br>'); } 
     
    WinPrint.document.write('<br>3.4 Текущее состояние отрасли экономики РФ на развитие которой направлено мероприятие: ');
    WinPrint.document.write(''+document.getElementById("Current").value+'<br>');      
@@ -512,28 +519,53 @@ $( function() {
    WinPrint.document.write(''+document.getElementById("Problems").value+'<br>');       
    WinPrint.document.write('<br>3.6 Мероприятие планируется реализовать в соответствии со следующими нормативными документами: '+document.getElementById("NPA_Base").value+'<br>'); 
    
-   WinPrint.document.write('<br>3.7 Требования ' + document.getElementById("System4").value + '<br>');
-   if ((document.getElementById("Profit").value != 'Profit4')) { WinPrint.document.write('<br>3.7.1 Система реализуемая в рамках Мероприятия должна включать функции: '+document.getElementById("FT").value+'<br>'); 
+   WinPrint.document.write('<br>3.7 Требования на ' + document.getElementById("System4").value + '<br>'); 
+   
+   
+   if ((document.getElementById("Profit").value == 'Profit1')) { WinPrint.document.write('<br>3.7.1 Система реализуемая в рамках Мероприятия должна включать функции: '+document.getElementById("FT").value+'<br>'); 
 
    WinPrint.document.write('<br>3.7.2 Система реализуемая в рамках Мероприятия должна включать следующие подсистемы: '+document.getElementById("FT2").value+'<br>'); 
    
-   WinPrint.document.write('<br>3.7.3 Система реализуемая в рамках Мероприятия должна включать следующие требования по безопасности: '+document.getElementById("FT4").value+'<br>'); 
+   }
+      if ((document.getElementById("Profit").value == 'Profit2')) { WinPrint.document.write('<br>3.7.1 Система развиваемая в рамках Мероприятия должна включать функции: '+document.getElementById("FT").value+'<br>'); 
+
+   WinPrint.document.write('<br>3.7.2 Система развиваемая в рамках Мероприятия должна включать следующие подсистемы: '+document.getElementById("FT2").value+'<br>'); 
+   
    }
    
-   if ((document.getElementById("Profit").value == 'Profit4')) { WinPrint.document.write('<br>3.7.1 Система выводимая из эксплуатации в рамках Мероприятия должна включать следующие работы: '+document.getElementById("FTRE").value+'<br>'); 
-    WinPrint.document.write('<br>3.7.2 Работы по выводу из эксплуатации Системы в рамках Мероприятия должны включать следующие требования по безопасности: '+document.getElementById("FT4").value+'<br>'); 
+   if ((document.getElementById("Profit").value == 'Profit3')) { 
+    WinPrint.document.write('<br>3.7.1 Система эксплуатируемая в рамках Мероприятия должна включать следующие работы: '+document.getElementById("FT").value+'<br>'); 
+    WinPrint.document.write('<br>3.7.2 Подсистемы, которые быть введены в эксплуатацию: '+document.getElementById("FT2").value+'<br>'); 
+    WinPrint.document.write('<br>3.7.3 Работы по эксплуатации Системы в рамках Мероприятия должны включать следующие требования по безопасности: '+document.getElementById("FT4E").value+'<br>'); 
+   
+   }
+   if ((document.getElementById("Profit").value == 'Profit4')) { 
+    WinPrint.document.write('<br>3.7.1 Система выводимая из эксплуатации в рамках Мероприятия должна включать следующие работы: '+document.getElementById("FTRE").value+'<br>'); 
+    WinPrint.document.write('<br>3.7.2 Работы по выводу из эксплуатации Системы в рамках Мероприятия должны включать следующие требования по безопасности: '+document.getElementById("FT4V").value+'<br>'); 
    
    }
    if ((document.getElementById("Profit").value == 'Profit1')) {
+      WinPrint.document.write('<br>3.7.3 Система реализуемая в рамках Мероприятия должна включать следующие требования по безопасности: '+document.getElementById("FT4").value+'<br>'); 
+
    if ((document.getElementById("web4").value == '1')) { WinPrint.document.write('<br>3.7.4 Система реализуемая в рамках Мероприятия должна включать открытые данные: '+document.getElementById("web44").value+'<br>'); }
    
    if ((document.getElementById("web4").value == '2')) { WinPrint.document.write('<br>3.7.4 Система реализуемая в рамках Мероприятия не будет включать открытые данные.<br>'); }
+ 
+ 
+ 
+   WinPrint.document.write('<br>3.7.5 Система реализуемая в рамках Мероприятия должна использовать следущие технологии импортозамещения: '+document.getElementById("FT_im4").value+'<br>');
    }
    if ((document.getElementById("Profit").value == 'Profit2')) {
-   if ((document.getElementById("web4").value == '1')) { WinPrint.document.write('<br>3.7.4 Система реализуемая в рамках Мероприятия должна включать открытые данные: '+document.getElementById("web44").value+'<br>'); }
+      WinPrint.document.write('<br>3.7.3 Система развиваемая в рамках Мероприятия должна включать следующие требования по безопасности: '+document.getElementById("FT4").value+'<br>'); 
+
+   if ((document.getElementById("web4").value == '11')) { WinPrint.document.write('<br>3.7.4 Система развиваемая в рамках Мероприятия должна включать открытые данные: '+document.getElementById("web44").value+'<br>'); }
    
-   if ((document.getElementById("web4").value == '2')) { WinPrint.document.write('<br>3.7.4 Система реализуемая в рамках Мероприятия не будет включать открытые данные.<br>'); }
+   if ((document.getElementById("web4").value == '22')) { WinPrint.document.write('<br>3.7.4 Система развиваемая в рамках Мероприятия не будет включать открытые данные.<br>'); }
+   
+   
+   WinPrint.document.write('<br>3.7.4 Система развиваемая в рамках Мероприятия должна использовать следущие технологии импортозамещения: '+document.getElementById("FT_im4").value+'<br>');
    }
+   
    for (step = 0; step < 12; step++) {
  
    WinPrint.document.write('<br>'); }
@@ -618,7 +650,7 @@ $( function() {
    
    
    
-   WinPrint.document.write('<br>5.2 Состав, основные характеристики и трудоемкость работ (услуг) по реализации мероприятия<br><br>');
+   WinPrint.document.write('<br>5.3 Состав, основные характеристики и трудоемкость работ (услуг) по реализации мероприятия<br><br>');
     
    WinPrint.document.write(test44); 
    }
@@ -853,7 +885,7 @@ $( function() {
   WinPrint.document.close();
   WinPrint.focus();     
   }
-        var rollbackTo = false, bal4 = 0;
+        var rollbackTo = false, bal4 = 0, q4 = 0;
 		var originalState = false;
 		function storeState(stateWrapper) {
 			rollbackTo = stateWrapper.current;
@@ -881,7 +913,7 @@ $( function() {
                         } else if (name == "name44") {
                            
                           document.getElementById("NPI44").innerHTML = 'Например: Министерство Культуры РФ'; 
-
+                          document.getElementById("e4").innerHTML = "Качество создания ТЭО:";
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                           // document.getElementById("navi1").innerHTML = "";
@@ -889,45 +921,69 @@ $( function() {
                            
                           document.getElementById("NPI44").innerHTML = 'Например: Создание системы анализа ценностей Минкультуры'; 
 
+                     if (document.getElementById("FOIV").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+                     if (document.getElementById("FOIV").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";  }
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                          // document.getElementById("navi1").innerHTML = "";
                         } else if (name == "Name") {
                           if (otv4 !="") {bal4=bal4+1}; 
-
+                     if (document.getElementById("Name").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+					 if (document.getElementById("Name").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";  }
                           document.getElementById("NPI44").innerHTML = 'Например: Система анализа ценностей Минкультуры';
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("navi1").innerHTML = "<s>Титульная страница";
                         } else if (name == "System") {
                           if (otv4 !="") {bal4=bal4+1;} 
+    
+                          
+                    if (document.getElementById("System").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+                    
+                    if (document.getElementById("System").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";  }
                           document.getElementById("NPI44").innerHTML = 'Например: САЦ';
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                         } else if (name == "System4") {
                           if (otv4 !="") {bal4=bal4+1;} 
+                     if (document.getElementById("System4").value.length < 1 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+                     
+                     if (document.getElementById("System4").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";}
                           document.getElementById("NPI44").innerHTML = 'Например: Полномочия по обеспечению создания и развития ГИИС ЭБ закреплены за Федеральным Казначейством распоряжением Правительства Российской Федерации от 20 июля 2011 г. № 1275-р';
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("navi2").innerHTML = "<s>Общие сведения";
                         } else if (name == "Base") {
                           if (otv4 !="") {bal4=bal4+1;} 
+                         
+                          if (document.getElementById("Base").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+                     	  if (document.getElementById("Base").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";}
+
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("NPI44").innerHTML = 'Например: Мероприятие направлено на снижение времени предоставления государственной услуги с 10 минут до 4 минут; <br> Количество государственных функций, выполняемых государственным органом посредством информационной системы - 4';
                         } else if (name == "KPI_Base") {
                           if (otv4 !="") {bal4=bal4+1;} 
+                   
+                    if (document.getElementById("KPI_Base").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+                    
+                    if (document.getElementById("KPI_Base").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";}
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("NPI44").innerHTML = 'Например: создание Системы  будет осуществляться за счет средств федерального бюджета, предусмотренных Федеральным законом от 19 декабря 2016 г. № 415-ФЗ';
                         } else if (name == "NPA_Base") {
                           if (otv4 !="") {bal4=bal4+1;} 
+                          if (document.getElementById("NPA_Base").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+                    
+                          if (document.getElementById("NPA_Base").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";}
                           document.getElementById("NPI44").innerHTML = 'Выберите цели.';
+                          document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("navi4").innerHTML = "<s>Основание для мероприятия";
                         } else if (name == "Type") {
                           if (otv4 !="") {bal4=bal4+1;} 
+                          document.getElementById("e4").innerHTML = "Качество создания ТЭО:";
                           document.getElementById("NPI44").innerHTML = 'Рекомендация: Если Вы закупается программное или аппаратное обеспечение для защиты информации или проводите работы по защите информации, то ставте приоритетное направление - Защита информации.<br> Если закупается программное или аппаратное обеспечение для создания интернет-порталов или проводятся работы по созданию интернет-порталов - выбирайте направление: Повышение качества и доступности информационных ресурсов.';
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
@@ -943,7 +999,8 @@ $( function() {
                         } else if (name == "Current") {
                           if (otv4 !="") {bal4=bal4+1;} 
                           document.getElementById("NPI44").innerHTML = 'Опишите ситуацию, из-за чего необходимо провести Ваше Мероприятие. Это может быть список проблем.  <br> Важно отметить здесь, что проводимое мероприятие не дублирует уже проведенные ранее мероприятия и привести аргументы. ';
-                          if (document.getElementById("Current").innerHTML.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4;}
+                          if (document.getElementById("Current").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+                          if (document.getElementById("Current").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: ";}
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
                         } else if (name == "Problems") {
@@ -951,10 +1008,14 @@ $( function() {
                           document.getElementById("NPI44").innerHTML = 'Обычно Вы сможете сразу определить это из названия Вашего мероприятия. <br> ';
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
-                          if (document.getElementById("Current").innerHTML.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: полная Халтура!"; bal4=0;}
+                          if (document.getElementById("Problems").value.length < 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Предупреждение - Халтура!"; bal4=bal4-4; q4 = q4-1;}
+                          
+                          if (document.getElementById("Problems").value.length > 4 ) {document.getElementById("e4").innerHTML = "Качество создания ТЭО:";}
                           document.getElementById("navi5").innerHTML = "<s>Проблемы решаемые мероприятием";
                         } else if (name == "Profit") {
                           if (otv4 !="") {bal4=bal4+1;} 
+                          
+                          document.getElementById("e4").innerHTML = "Качество создания ТЭО:";
                           document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("vide44").innerHTML = ''; 
@@ -979,68 +1040,80 @@ $( function() {
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "FT4") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'Рекомендуем почитать Гост 34. <br> ';
+                          document.getElementById("NPI44").innerHTML = 'Другими словами предполагается, что Ваша система будет опубликовывать данные на веб-сайте. <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("navi6").innerHTML = " <s>Требования";
                         } else if (name == "FTRE") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
+                          document.getElementById("vide44").innerHTML = ''; 
+                          document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
+                          document.getElementById("navi6").innerHTML = " <s>Требования";
+                        } else if (name == "FT4E") {
+                          if (otv4 !="") {bal4=bal4+1;} 
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
+                          document.getElementById("vide44").innerHTML = ''; 
+                          document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
+                          document.getElementById("navi6").innerHTML = " <s>Требования";
+                        } else if (name == "FT4V") {
+                          if (otv4 !="") {bal4=bal4+1;} 
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("navi6").innerHTML = " <s>Требования";
                         } else if (name == "web4") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = 'Например: 1) ФИО. <br> 2) Название. ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "web44") {
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           if (otv4 !="") {bal4=bal4+1;} 
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "normat_prik") {
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           if (otv4 !="") {bal4=bal4+1;} 
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "normat_prike") {
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           if (otv4 !="") {bal4=bal4+1;} 
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Crit_Profit") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = 'Например: <br> 1) Создана система <br> 2) Проведена интеграция Системы со СМЭВ <br><b><span class="colortext"> Не забывайте, </span> </b> что работы типа: <br> - Обучения, <br> - Разработка методологий,<br> - НИР <br> <span class="colortext">не могут являться результатами мероприятий и не подлежат оплате по 242 виду расходов </span> в соответствии с пунктом 5.2 раздела III «Классификация расходов бюджетов» Указаний о порядке применения бюджетной классификации Российской Федерации, утвержденных приказом Минфина России от 1 июля 2013 г. № 65н ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                           document.getElementById("navi7").innerHTML = "<s>Ключевые показатели";
                         } else if (name == "Success_Profit") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                            document.getElementById("navi8").innerHTML = "<s>Критерии достижения целей";
                         } else if (name == "Success_mate") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Success_nomate") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                            document.getElementById("navi9").innerHTML = "<s>Премущества";
                         } else if (name == "Type_Budget") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Metods") {
                         
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'TEOBOT является Вашим персональным виртуальным ассистентом в создании Технико-Экономических обоснований, сокращенно ТЭО. <br> ';
+                          document.getElementById("NPI44").innerHTML = ' <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "NP1") {
@@ -1135,6 +1208,12 @@ $( function() {
                           if (otv4 !="") {bal4=bal4+1;} 
                           document.getElementById("NPI44").innerHTML = 'TEOBOT благодарит Вас за потраченное время и надеется, что сделанное Экспресс-ТЭО значительно сократит время разработки проектной документации по мероприятию. <br> ';
                           document.getElementById("vide44").innerHTML = ''; 
+                          
+                          if (q4 < 0) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Неудовлетворительное ";}
+                          if (q4 >= 0) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Вы делаете успехи! ";}
+                          
+                          
+                          if (q4 > 0) {document.getElementById("e4").innerHTML = "Качество создания ТЭО: Нормальное ";}
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else {
                           document.getElementById("e2").innerHTML = " ";
