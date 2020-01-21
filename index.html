@@ -350,9 +350,11 @@ $( function() {
 	                                 
 	                                 
 	                                 
-	                                 <input id="Import" type="text" name="Import" data-callback="storeState" data-conv-question="Какие будут использованы технологии импортозамещения при проведении мероприятии ?"> 
+	                                 <select id="Import" type="text" name="Import" data-callback="storeState" data-conv-question="Является-ли Система ГИС ?"> 
+	                                 <option value="Да">Да</option>
+	                                 <option value="Нет">Нет</option>
+	                                 </select>
 	                                 
-	                                
 	                             	<select name="callbackTest" data-conv-question="Отлично, вы {name44}:0 на все вопросы ответили!" data-no-answer="true">
 	                                </select>
 	                                <select data-conv-question="Теперь Вы можете получить экспресс ТЭО Вашего мероприятия по информатизации" id="">
@@ -1235,7 +1237,7 @@ $( function() {
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                         } else if (name == "Norm") {
                           if (otv4 !="") {bal4=bal4+1;} 
-                          document.getElementById("NPI44").innerHTML = 'Просим Вас подтвердить или опровергнуть факт использования Российского ПО. <br> ';
+                          document.getElementById("NPI44").innerHTML = 'Просим Вас подтвердить или опровергнуть факт принадлежности Вашей Система к виду Государственной Информационной Системы. <br> Информацию можете взять из Федерального закона от 27.07.2006 N 149-ФЗ (ред. от 02.12.2019) "Об информации, информационных технологиях и о защите информации" ';
                           document.getElementById("vide44").innerHTML = ''; 
                           document.getElementById("e1").innerHTML = "Баллы за работу: " + bal4;
                            document.getElementById("navi10").innerHTML = "<s>Расчет бюджета";
