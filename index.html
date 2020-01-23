@@ -516,7 +516,9 @@ $( function() {
    if ((document.getElementById("Profit").value == 'Profit3')) { WinPrint.document.write('<br>Вводимая в эксплуатацию в этом мероприятии Система ' + document.getElementById("System4").value +  ' была создана на основе приказа: '+document.getElementById("normat_prik").value+'<br>'); } 
     
    WinPrint.document.write('<br>3.4 Текущее состояние отрасли экономики РФ на развитие которой направлено мероприятие: ');
-   WinPrint.document.write(''+document.getElementById("Current").value+'<br>');      
+   WinPrint.document.write(''+document.getElementById("Current").value+'<br>'); 
+    if ((document.getElementById("Import").value == 'Да')) { WinPrint.document.write('<br>' + document.getElementById("System4").value + ' является Государственной информационной системой.<br>'); }  
+    if ((document.getElementById("Import").value != 'Да')) { WinPrint.document.write('<br>' + document.getElementById("System4").value + ' не является Государственной информационной системой.<br>'); }      
    WinPrint.document.write('<br>3.5 В настоящее время существуют следующие проблемы, которые необходимо решить, используя Мероприятие по информатизации:<br>');
    WinPrint.document.write(''+document.getElementById("Problems").value+'<br>');       
    WinPrint.document.write('<br>3.6 Мероприятие планируется реализовать в соответствии со следующими нормативными документами: '+document.getElementById("NPA_Base").value+'<br>'); 
@@ -605,8 +607,26 @@ $( function() {
    
     
    WinPrint.document.write('<br>4.4 Нематериальные преимущества от реализации мероприятия<br>');
+   var elm4 = document.getElementById("Success_nomate");
+   e4='';
+  //случай мульти-режима
+  if (elm4.multiple) {
+  //перебираем массив опций
+    for (var i = 0; i < elm4.options.length; i ++) {
+    //если опция выбрана - добавим её в массив
+    if (elm4.options[i].selected) {
+    if ((elm4.options.length - i) !=0) {e4=e4+', '}
+    if (i ==0) {e4=' '}
+    e4=e4+' '+elm4.options[i].value;
+    } }
+    //случай одиночного выбора в select
+  } else
+    e4=elm4.value;
+   WinPrint.document.write('<br>В случае реализации Мероприятия будут достигнуты следующие не материальные достижения: '+e4+'<br>');
        
    WinPrint.document.write('<br>4.5 Итоговая оценка эффектов от реализации мероприятия<br>');
+   WinPrint.document.write('<br>В результате проведения Мероприятия будут достигнуты следующие результаты: '+document.getElementById("Success_Profit").value+'<br>');
+
    
    for (step = 0; step < 12; step++) {
    WinPrint.document.write('<br>'); }
@@ -677,6 +697,8 @@ $( function() {
    WinPrint.document.write('<br>5.3 Состав, основные характеристики и трудоемкость работ (услуг) по реализации мероприятия<br><br>');
     
    WinPrint.document.write(test44); 
+    if ((Sred44 < 33)) { WinPrint.document.write('<br><br>Коэффициент вариации по трем коммерческим предложением не превышает 33%.<br> В связи с этим, общий бюджет мероприятия составляет ' + Sred4 + ' тысяч рублей.'); }
+    if ((Sred44 > 33)) { WinPrint.document.write('<br><br>Коэффициент вариации по трем коммерческим предложением превышает 33%.<br> В связи с этим, невозможно использовать для формирования бюджета данные коммерческие предложения.'); }
    }
    
    
